@@ -17,12 +17,11 @@ class UnitTests(unittest.TestCase) :
         for i in range(50) :
             val = np.random.uniform(-2,2)
             inputs.append((val,))
-            vv = np.zeros(5)
-            vv[0] = np.floor( val / 1 )
-            val = val - vv[0] 
-            for j in range(4) : 
+            vv = np.zeros(10)
+            val = val - np.floor( val ) 
+            for j in range(10) : 
                 ppp = 10**(-1-j)
-                vv[j+1] = np.floor( val / ppp )
-                val = val - vv[j+1]*ppp
+                vv[j] = np.floor( val / ppp )
+                val = val - vv[j]*ppp
             outputs.append(vv)
-            assert( fc.check_func( 'getDecimalDigits', inputs, outputs ) )
+        assert( fc.check_func( 'getDecimalDigits', inputs, outputs ) )
